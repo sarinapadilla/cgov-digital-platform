@@ -101,4 +101,12 @@ interface MultiRouteAppModuleBuilderInterface {
    */
   public function alterTokens(array &$replacements, array $context, array $options = []);
 
+  /**
+   * Gets the list of metadata tokens for this app module to alter.
+   *
+   * @return array
+   *   Returns an array with the tokens that this app module should alter.
+   */
+  public function getTokensForAltering(array $options = []);
+
 }

@@ -137,4 +137,13 @@ abstract class AppModulePluginBase extends PluginBase implements AppModulePlugin
   public function alterTokens(array &$replacements, array $context, $path, array $options = []) {
   }
 
+  /**
+   * {@inheritdoc}
+   *
+   * The default implementation is a NOOP.
+   */
+  public function getTokensForAltering($path, array $options = []) {
+    return [];
+  }
+
 }

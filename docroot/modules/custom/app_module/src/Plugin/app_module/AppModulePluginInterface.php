@@ -188,4 +188,19 @@ interface AppModulePluginInterface extends PluginInspectionInterface {
    */
   public function alterTokens(array &$replacements, array $context, $path, array $options = []);
 
+  /**
+   * Gets the list of metadata tokens for this app module to alter.
+   *
+   * @param string $path
+   *   The requested app module path as a string. This is relative to the
+   *   app module alias. For the node /foo/bar, if the url requested is
+   *   /foo/bar/bazz/blah then the $path would be /bazz/blah.
+   * @param array $options
+   *   The settings for this instance of the AppModule on an entity.
+   *
+   * @return array
+   *   Returns an array with the tokens that this app module should alter.
+   */
+  public function getTokensForAltering($path, array $options = []);
+
 }

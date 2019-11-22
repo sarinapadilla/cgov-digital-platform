@@ -45,4 +45,12 @@ abstract class MultiRouteAppModuleBuilderBase implements MultiRouteAppModuleBuil
   public function alterTokens(array &$replacements, array $context, array $options = []) {
   }
 
+  /**
+   * {@inheritdoc}
+   *
+   * The default implementation is a NOOP.
+   */
+  public function getTokensForAltering(array $options = []) {
+  }
+
 }

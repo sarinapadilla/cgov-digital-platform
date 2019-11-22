@@ -107,4 +107,21 @@ abstract class MultiRouteAppModulePluginBase extends AppModulePluginBase {
     }
   }
 
+  /**
+   * {@inheritdoc}
+   *
+   * The default implementation is a NOOP.
+   */
+  public function getTokensForAltering($path, array $options = []) {
+    $builder = $this->getBuilderForRoute($path);
+
+    if ($builder) {
+      $tokensToAlter = $builder->getTokensForAltering($options);
+      return $tokensToAlter;
+    }
+    else {
+      return [];
+    }
+  }
+
 }

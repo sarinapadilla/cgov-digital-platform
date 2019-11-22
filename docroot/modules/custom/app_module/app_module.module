@@ -179,15 +179,21 @@ function app_module_tokens_alter(array &$replacements, array $context, Bubbleabl
   $app_module_builder = \Drupal::service('app_module.builder');
 
   if ($app_module_plugin) {
-    $app_module_plugin->alterTokens($replacements, $context, $app_module_route, (array) $app_module_data);
-    // Add cache dependencies to bubble up because we are probably overwriting
-    // tokens that come from a node. If we are doing that, then we are probably
-    // need to vary the cache context. The app_module *SHOULD* already be doing
-    // this, so the cache metadata for the app_module build will be the same as
-    // what is needed here.
-    $bubbleable_metadata->addCacheableDependency(
-      $app_module_builder->getCacheDependencyForBuild($app_module, $app_module_route, (array) $app_module_data)
-    );
+    $tokensToAlter = $app_module_plugin->getTokensForAltering($app_module_route, (array) $app_module_data);
+
+    if (count(array_intersect($tokensToAlter, array_keys($replacements))) !== 0) {
+      $app_module_plugin->alterTokens($replacements, $context, $app_module_route, (array) $app_module_data);
+
+      // Add cache dependencies to bubble up because we are probably
+      // overwriting tokens that come from a node. If we are doing
+      // that, then we are probably need to vary the cache context.
+      // The app_module *SHOULD* already be doing this, so the cache
+      // metadata for the app_module build will be the same as what
+      // is needed here.
+      $bubbleable_metadata->addCacheableDependency(
+        $app_module_builder->getCacheDependencyForBuild($app_module, $app_module_route, (array) $app_module_data)
+      );
+    }
   }
 }
 
