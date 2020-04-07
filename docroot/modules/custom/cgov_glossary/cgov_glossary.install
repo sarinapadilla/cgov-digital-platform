@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Contains cgov_glossary.install.
+ */
+
+use Drupal\user\Entity\Role;
+
+/**
+ * Implements hook_install().
+ *
+ * Set up cgov_glossary module.
+ *
+ * @see system_install()
+ */
+function cgov_glossary_install() {
+  $roles = Role::loadMultiple(['anonymous', 'authenticated']);
+}
